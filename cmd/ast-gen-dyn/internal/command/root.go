@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"log/slog"
@@ -17,8 +17,8 @@ func NewRootCmd() *RootCmd {
 	root := &RootCmd{}
 	cmd := &cobra.Command{
 		Use:           "ast-gen-dyn",
-		Short:         "gen gin tools",
-		Long:          "ast-gen-dyn: gen dyn code from interface",
+		Short:         "generate http server and client tools",
+		Long:          "generate http server and client tools",
 		Version:       BuildVersion(),
 		SilenceUsage:  false,
 		SilenceErrors: false,

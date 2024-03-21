@@ -1,4 +1,3 @@
-//go:generate go-to-protobuf -go-header-file model.go
 package rapier
 
 import (
