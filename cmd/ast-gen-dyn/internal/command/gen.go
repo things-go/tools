@@ -15,6 +15,7 @@ import (
 
 type GinGenOption struct {
 	Interface []string
+	Mode      string
 	astdyn.Option
 }
 
