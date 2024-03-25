@@ -26,7 +26,7 @@ type RootCmd struct {
 func NewRootCmd() *RootCmd {
 	root := &RootCmd{}
 	cmd := &cobra.Command{
-		Use:       "ast-gen-dyn",
+		Use:       "astgen-dyn",
 		Short:     "generate http server and client tools",
 		Long:      "generate http server and client tools",
 		Version:   BuildVersion(),

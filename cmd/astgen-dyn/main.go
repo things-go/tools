@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/things-go/tools/cmd/ast-gen-dyn/internal/command"
+	"github.com/things-go/tools/cmd/astgen-dyn/internal/command"
 )
 
 func main() {

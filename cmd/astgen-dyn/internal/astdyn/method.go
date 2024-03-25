@@ -299,7 +299,7 @@ func (method *MethodMetadata) genGinHandler(ifcTypeName string, rule *Rule, num 
 	// 		}
 	// }
 	return astgo.NewFuncDecl(
-		handlerFuncName(ifcTypeName, method.Name, num),
+		httpServerHandlerFuncName(ifcTypeName, method.Name, num),
 		astgo.NewFuncType().
 			Param(astgo.NewField(astgo.NewIdent(ifcTypeNewName)).Name("srv").FuncField()).
 			Result(astgo.NewField(NewExpr_GinHandlerFunc()).FuncField()).

@@ -1,4 +1,4 @@
-//go:generate ast-gen-dyn -i Dict
+//go:generate astgen-dyn -i Dict
 package dyn
 
 type DictEntry struct {

@@ -8,9 +8,10 @@ import (
 	"path"
 	"slices"
 
-	"github.com/things-go/tools/cmd/ast-gen-dyn/internal/astdyn"
+	"github.com/things-go/tools/cmd/astgen-dyn/internal/astdyn"
 	"github.com/thinkgos/astgo"
 	"golang.org/x/tools/go/packages"
+	"golang.org/x/tools/imports"
 )
 
 type GinGenOption struct {
@@ -63,12 +64,12 @@ func (g *GinGen) Generate() error {
 }
 
 func (g *GinGen) InspectFile(file *ast.File) error {
-	imports := astgo.NewImportMgr()
+	importMgr := astgo.NewImportMgr()
 	for _, imp := range file.Imports {
 		if imp.Name == nil {
-			imports.AddNamedImport("", astgo.ImportPath(imp))
+			importMgr.AddNamedImport("", astgo.ImportPath(imp))
 		} else {
-			imports.AddNamedImport(imp.Name.Name, astgo.ImportPath(imp))
+			importMgr.AddNamedImport(imp.Name.Name, astgo.ImportPath(imp))
 		}
 	}
 	disposeName := make(map[string]struct{}, len(g.Interface))
@@ -100,8 +101,11 @@ func (g *GinGen) InspectFile(file *ast.File) error {
 				Imports:  astgo.NewImportMgr(),
 				GenDecl:  nil,
 				Decls:    nil,
+				Formatter: func(data []byte) ([]byte, error) {
+					return imports.Process("", data, &imports.Options{Comments: true, TabIndent: true, TabWidth: 4})
+				},
 			}
-			imports.IterNamedImport(func(name, path string) bool {
+			importMgr.IterNamedImport(func(name, path string) bool {
 				f.Imports.AddNamedImport(name, path)
 				return true
 			})

@@ -94,7 +94,7 @@ func (m *InterfaceMetadata) GenFuncDecl_GinRegisterHttpServer() *ast.FuncDecl {
 						Selector(rule.Method).
 						Call(
 							astgo.NewLitString(strconv.Quote(rule.Path)),
-							astgo.NewChainExprIdent(handlerFuncName(m.Name, method.Name, num)).
+							astgo.NewChainExprIdent(httpServerHandlerFuncName(m.Name, method.Name, num)).
 								Call(astgo.NewIdent("srv")).
 								Build(),
 						).
@@ -137,6 +137,6 @@ func registerHttpServerFuncName(name string) string {
 	return "Register" + name + "HTTPServer"
 }
 
-func handlerFuncName(ifcTypeName, methodName string, num int) string {
+func httpServerHandlerFuncName(ifcTypeName, methodName string, num int) string {
 	return fmt.Sprintf("_%s_%s%d_HTTP_Handler", ifcTypeName, methodName, num)
 }
